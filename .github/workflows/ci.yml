@@ -29,20 +29,15 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           node-version: 14
 
-      - name: Setup Linux Dependencies
-        if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get install -y software-properties-common libx11-dev libxtst-dev libxt-dev libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev xorg-dev libxcb-xkb-dev libxkbfile-dev libxinerama-dev
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
 
       - name: Install Packages
         run: npm i --ignore-scripts
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Set msvs_version
-        run: echo "msvs_version=2019" >> $GITHUB_ENV
-      
       # Build only if version tag is not present
       - name: Build
         run: npm run build -- --all
