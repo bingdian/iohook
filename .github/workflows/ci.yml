@@ -46,7 +46,7 @@ jobs:
 
       # Build and publish if version tag is present
       - name: Build & Publish Prebuilds
-        run: npm run build:ci -- --msvs_version=2019
+        run: npm run build:ci -- --msvs_version=2022
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           ARCH: ${{ matrix.arch }}
